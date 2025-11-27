@@ -498,6 +498,10 @@ declare namespace $ {
     var $mol_dom_context: typeof globalThis;
 }
 
+declare namespace $ {
+    function $node_internal_check(name: string): boolean;
+}
+
 interface $node {
     [key: string]: any;
 }

@@ -2132,43 +2132,62 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    const mod = require('module');
+    const internals = mod.builtinModules;
+    function $node_internal_check(name) {
+        if (name.startsWith('node:'))
+            return true;
+        return internals.includes(name);
+    }
+    $.$node_internal_check = $node_internal_check;
+})($ || ($ = {}));
+
+;
+"use strict";
 var $node = new Proxy({ require }, {
     get(target, name, wrapper) {
         if (target[name])
             return target[name];
-        if (name.startsWith('node:'))
+        const $$ = $;
+        if ($$.$node_internal_check(name, target))
             return target.require(name);
         if (name[0] === '.')
-            return target.require(name);
-        const mod = target.require('module');
-        if (mod.builtinModules.indexOf(name) >= 0)
             return target.require(name);
         try {
             target.require.resolve(name);
         }
         catch {
-            const $$ = $;
-            $$.$mol_exec('.', 'npm', 'install', '--omit=dev', name);
+            try {
+                $$.$mol_exec('.', 'npm', 'install', '--omit=dev', name);
+            }
+            catch (e) {
+                if ($$.$mol_promise_like(e))
+                    $$.$mol_fail_hidden(e);
+            }
             try {
                 $$.$mol_exec('.', 'npm', 'install', '--omit=dev', '@types/' + name);
             }
             catch (e) {
-                if ($$.$mol_fail_catch(e)) {
-                    $$.$mol_fail_log(e);
-                }
+                if ($$.$mol_promise_like(e))
+                    $$.$mol_fail_hidden(e);
+                $$.$mol_fail_log(e);
             }
         }
         try {
             return target.require(name);
         }
         catch (error) {
-            if ($.$mol_fail_catch(error) && error.code === 'ERR_REQUIRE_ESM') {
+            if ($$.$mol_promise_like(error))
+                $$.$mol_fail_hidden(error);
+            if (error && typeof error === 'object' && error.code === 'ERR_REQUIRE_ESM') {
                 const module = cache.get(name);
                 if (module)
                     return module;
                 throw Object.assign(import(name).then(module => cache.set(name, module)), { cause: error });
             }
-            $.$mol_fail_log(error);
+            $$.$mol_fail_log(error);
             return null;
         }
     },
@@ -3892,20 +3911,6 @@ var $;
 
 ;
 "use strict";
-var $;
-(function ($_1) {
-    $mol_test({
-        'FQN of anon function'($) {
-            const $$ = Object.assign($, { $mol_func_name_test: (() => () => { })() });
-            $mol_assert_equal($$.$mol_func_name_test.name, '');
-            $mol_assert_equal($$.$mol_func_name($$.$mol_func_name_test), '$mol_func_name_test');
-            $mol_assert_equal($$.$mol_func_name_test.name, '$mol_func_name_test');
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 "use strict";
@@ -4688,6 +4693,20 @@ var $;
         $.$mol_log3_warn = () => { };
         $.$mol_log3_rise = () => { };
         $.$mol_log3_area = () => () => { };
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    $mol_test({
+        'FQN of anon function'($) {
+            const $$ = Object.assign($, { $mol_func_name_test: (() => () => { })() });
+            $mol_assert_equal($$.$mol_func_name_test.name, '');
+            $mol_assert_equal($$.$mol_func_name($$.$mol_func_name_test), '$mol_func_name_test');
+            $mol_assert_equal($$.$mol_func_name_test.name, '$mol_func_name_test');
+        },
     });
 })($ || ($ = {}));
 

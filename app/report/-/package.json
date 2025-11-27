@@ -78,6 +78,8 @@
     "$mol_dom_context",
     "$mol_dom",
     "$node",
+    "$node_internal_check",
+    "$node_internal",
     "$mol_exec",
     "$mol_run",
     "$mol_error_mix",
@@ -139,7 +141,6 @@
     "$mol_charset_encoding",
     "$mol_charset_encode",
     "$mol_file_transaction",
-    "$node_modules",
     "$mol_select",
     "$mol_pick",
     "$mol_pop",
@@ -180,6 +181,7 @@
     "$mol_icon_chevron_right"
   ],
   "dependencies": {
+    "internal": "*",
     "jsdom": "*"
   }
 }

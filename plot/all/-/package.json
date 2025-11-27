@@ -1,6 +1,6 @@
 {
   "name": "mol_plot_all",
-  "version": "1.2.1587",
+  "version": "1.2.1589",
   "exports": {
     "node": {
       "import": "./node.mjs",
@@ -80,6 +80,8 @@
     "$mol_dom_context",
     "$mol_dom",
     "$node",
+    "$node_internal_check",
+    "$node_internal",
     "$mol_exec",
     "$mol_run",
     "$mol_error_mix",
@@ -151,6 +153,7 @@
     "$mol_plot_mark_hor"
   ],
   "dependencies": {
+    "internal": "*",
     "jsdom": "*"
   }
 }
