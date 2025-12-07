@@ -1,6 +1,6 @@
 {
   "name": "mol_plot_all",
-  "version": "1.2.1599",
+  "version": "1.2.1601",
   "exports": {
     "node": {
       "import": "./node.mjs",
@@ -153,7 +153,6 @@
     "$mol_plot_mark_hor"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }

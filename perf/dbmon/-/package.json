@@ -135,7 +135,6 @@
     "$mol_state"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }

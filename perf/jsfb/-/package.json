@@ -149,7 +149,6 @@
     "$mol_array"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }

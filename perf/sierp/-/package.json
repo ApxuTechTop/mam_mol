@@ -120,7 +120,6 @@
     "$mol_type_enforce"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }
