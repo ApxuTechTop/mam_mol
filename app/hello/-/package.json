@@ -79,7 +79,7 @@
     "$node",
     "$node_internal_check",
     "$node_internal",
-    "$mol_exec",
+    "$node_autoinstall",
     "$mol_run",
     "$mol_error_mix",
     "$mol_env",
@@ -125,6 +125,7 @@
     "$mol_type_enforce"
   ],
   "dependencies": {
+    "autoinstall": "*",
     "jsdom": "*"
   }
 }

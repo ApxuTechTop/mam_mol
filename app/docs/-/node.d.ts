@@ -509,11 +509,14 @@ declare namespace $ {
     function $node_internal_check(name: string): boolean;
 }
 
+declare namespace $ {
+    function $node_autoinstall(this: typeof $, name: string): void;
+}
+
 interface $node {
     [key: string]: any;
 }
 declare var $node: $node;
-declare const cache: Map<string, any>;
 
 declare namespace $ {
     class $mol_error_mix<Cause extends {} = {}> extends AggregateError {
@@ -569,7 +572,7 @@ declare namespace $ {
     };
     class $mol_run extends $mol_object {
         static async_enabled(): boolean;
-        static spawn(options: $mol_run_options): $mol_run_error_context | import("child_process").SpawnSyncReturns<string | NonSharedBuffer>;
+        static spawn(options: $mol_run_options): import("child_process").SpawnSyncReturns<string | NonSharedBuffer> | $mol_run_error_context;
         static spawn_async({ dir, sync, timeout, command, env }: $mol_run_options & {
             sync?: boolean;
         }): import("child_process").SpawnSyncReturns<string | NonSharedBuffer> | (Promise<$mol_run_error_context> & {
@@ -577,10 +580,6 @@ declare namespace $ {
         });
         static error_message(res?: $mol_run_error_context): string;
     }
-}
-
-declare namespace $ {
-    function $mol_exec(this: $, dir: string, command: string, ...args: readonly string[]): $mol_run_error_context | import("child_process").SpawnSyncReturns<string | NonSharedBuffer>;
 }
 
 declare namespace $ {
